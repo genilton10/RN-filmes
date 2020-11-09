@@ -1,21 +1,38 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 
-export default function App() {
+import React, {useState} from 'react';
+import { Text, View } from 'react-native';
+import styled from 'styled-components';
+
+const Pagina = styled.View`
+  flex: 1;
+`
+const Cabecalho = styled.View`
+  height: 60px;
+  background-color: #1827AC;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`
+const Busca = styled.TextInput`
+  color: #fff;
+  font-size: 20px;
+`
+
+const App = () => {
+
+  const [nome, alteraNome] = useState('');
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+      <Pagina>
+      <Cabecalho>
+        <Busca
+          placeholder="Dig o nome do filme...."
+          value={nome}
+          placeholderTextColor="#ccc"
+          onChangeText={(filme) => alteraNome(filme)}
+        />
+      </Cabecalho>
+      </Pagina>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
