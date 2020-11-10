@@ -26,7 +26,10 @@ const Iconebuscar = styled.Image`
   width: 30px;
   height: 30px;
 `
-const Centro = styled.View``;
+const Centro = styled.View`
+align-items: center;
+padding-top: 30px;
+`;
 
 const Imagem = styled.Image`
   width: 80%;
@@ -34,11 +37,17 @@ const Imagem = styled.Image`
   border-radius: 10px;
 `;
 
-
 const App = () => {
 
   const [nome, alteraNome] = useState('');
-  const [filme, alteraFilme] = useState({"Title":"Harry Potter and the Deathly Hallows: Part 2","Year":"2011","Rated":"PG-13","Released":"15 Jul 2011","Runtime":"130 min","Genre":"Adventure, Drama, Fantasy, Mystery","Director":"David Yates","Writer":"Steve Kloves (screenplay), J.K. Rowling (novel)","Actors":"Ralph Fiennes, Michael Gambon, Alan Rickman, Daniel Radcliffe","Plot":"Harry, Ron, and Hermione search for Voldemort's remaining Horcruxes in their effort to destroy the Dark Lord as the final battle rages on at Hogwarts.","Language":"English","Country":"UK, USA","Awards":"Nominated for 3 Oscars. Another 46 wins & 91 nominations.","Poster":"https://m.media-amazon.com/images/M/MV5BMGVmMWNiMDktYjQ0Mi00MWIxLTk0N2UtN2ZlYTdkN2IzNDNlXkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_SX300.jpg","Ratings":[{"Source":"Internet Movie Database","Value":"8.1/10"},{"Source":"Rotten Tomatoes","Value":"96%"},{"Source":"Metacritic","Value":"85/100"}],"Metascore":"85","imdbRating":"8.1","imdbVotes":"747,169","imdbID":"tt1201607","Type":"movie","DVD":"N/A","BoxOffice":"N/A","Production":"Heyday Films, Moving Picture Company, Warner Bros.","Website":"N/A","Response":"True"});
+  const [filme, alteraFilme] = useState({});
+
+  const buscarFilme = async () =>{
+    const requisicao = await fetch(`http://www.omdbapi.com/?apikey=8159cc5a&t= ${nome}`, );
+    const resultado = await requisicao.json();
+    console.log(resultado);
+    alteraFilme(resultado);
+  }
 
   return (
       <Pagina>
@@ -49,13 +58,13 @@ const App = () => {
           placeholderTextColor="#ccc"
           onChangeText={(titulo) => alteraNome(titulo)}
         />
-      <Botao>
+      <Botao activeOpacity ={0.3} onPress={buscarFilme}>
         <Iconebuscar source={require('./src/imagens/img01.png')}/>
       </Botao>
       </Cabecalho>
-      <View>
+      <Centro>
         <Imagem source = {{uri:filme.Poster}}/>
-      </View>
+      </Centro>
       </Pagina>
   );
 }
