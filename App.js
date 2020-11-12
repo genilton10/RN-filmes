@@ -16,9 +16,24 @@ const Cabecalho = styled.View`
   padding-left: 30px;
   padding-right: 30px;
 `
+const Informacoes = styled.View`
+  flex: 3;
+`;
+const Titulo = styled.Text`
+  font-size: 20px;
+`;
+const Linha1 = styled.View`
+  align-items: center;
+`;
+const Linha2 = styled.View`
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-around;
+`;
 const Busca = styled.TextInput`
   color: #fff;
   font-size: 20px;
+
 `
 const Botao = styled.TouchableOpacity``;
 
@@ -27,8 +42,9 @@ const Iconebuscar = styled.Image`
   height: 30px;
 `
 const Centro = styled.View`
-align-items: center;
-padding-top: 30px;
+  align-items: center;
+  justify-content: center;
+  flex: 7;
 `;
 
 const Imagem = styled.Image`
@@ -65,6 +81,17 @@ const App = () => {
       <Centro>
         <Imagem source = {{uri:filme.Poster}}/>
       </Centro>
+      <Informacoes>
+        <Linha1>
+          <Titulo>{filme.Title}</Titulo>
+        </Linha1>
+        <Linha2>
+          <Text>Ano: {filme.Year}</Text>
+          <Text>Duração: {filme.Runtime}</Text>
+          <Text>Pais: {filme.Country}</Text>
+        </Linha2>
+        <Text>Enredo: {filme.Plot}</Text>
+      </Informacoes>
       </Pagina>
   );
 }
